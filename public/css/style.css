@@ -1,0 +1,188 @@
+/* KursusKu - Tema Laut (Samudra Animated) Week 7 */
+
+:root {
+    --biru-tua: #0f4c81;       /* Biru laut dalam */
+    --biru-sedang: #1b6ca8;    /* Biru samudra */
+    --biru-muda: #e0f2fe;      /* Latar belakang dasar */
+    --oranye-terumbu: #f59e0b; /* Aksen oranye terumbu karang */
+    --teks-tua: #0c2a3a;       /* Warna teks utama */
+    --border-kartu: #bae6fd;   /* Garis tepi biru muda */
+}
+
+* { 
+    box-sizing: border-box; 
+}
+
+/* Background Bergerak Halus ala Gelombang Laut */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(-45deg, #e0f2fe, #bae6fd, #7dd3fc, #e0f2fe);
+    background-size: 400% 400%;
+    animation: gelombangLaut 12s ease infinite;
+    color: var(--teks-tua);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Animasi Pergeseran Warna Air Laut */
+@keyframes gelombangLaut {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container {
+    width: min(1100px, 92%);
+    margin: 0 auto;
+}
+
+/* Navbar Tema Laut */
+.navbar {
+    background: linear-gradient(135deg, var(--biru-tua), var(--biru-sedang));
+    color: white;
+    padding: 18px 0;
+    border-bottom: 4px solid var(--oranye-terumbu);
+    box-shadow: 0 4px 12px rgba(15, 76, 129, 0.2);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar strong {
+    font-size: 1.4rem;
+    color: var(--oranye-terumbu);
+    letter-spacing: 0.5px;
+}
+
+.navbar nav a {
+    text-decoration: none;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.navbar nav a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Hero Section */
+.hero {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 32px;
+    align-items: center;
+    padding: 56px 0;
+}
+
+.hero p:first-child {
+    color: var(--biru-tua);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.hero h1 {
+    color: var(--biru-tua);
+    font-size: 2.3rem;
+    margin-top: 0;
+    line-height: 1.2;
+}
+
+.hero img {
+    width: 100%;
+    border-radius: 16px;
+    border: 3px solid var(--oranye-terumbu);
+    box-shadow: 0 10px 25px rgba(15, 76, 129, 0.25);
+    object-fit: cover;
+    /* Efek mengapung lembut pada gambar hero */
+    animation: mengapung 4s ease-in-out infinite;
+}
+
+/* Animasi Mengapung (Floating) */
+@keyframes mengapung {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Section Title */
+main h2 {
+    color: var(--biru-tua);
+    border-left: 5px solid var(--oranye-terumbu);
+    padding-left: 12px;
+    margin-bottom: 24px;
+}
+
+/* Kartu Kursus (Course Grid) */
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding-bottom: 48px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.9); /* Kartu semi-transparan agar latar belakang laut terlihat */
+    backdrop-filter: blur(4px);
+    padding: 24px;
+    border-radius: 14px;
+    border: 1px solid var(--border-kartu);
+    border-top: 5px solid var(--oranye-terumbu);
+    box-shadow: 0 4px 15px rgba(12, 42, 58, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 22px rgba(15, 76, 129, 0.18);
+}
+
+.card small {
+    display: inline-block;
+    background-color: var(--biru-sedang);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    color: var(--biru-tua);
+    margin: 8px 0;
+}
+
+.card p {
+    color: #374151;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* Responsive View (Tampilan Mobile) */
+@media (max-width: 760px) {
+    .hero,
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+}

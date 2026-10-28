@@ -1,0 +1,13 @@
+# AI Usage Log - KursusKu Pisang Pride (Halaman Pendaftaran)
+
+| Masalah/tujuan | Referensi dari AI | Keputusan pengembang | Hasil uji |
+| -------------- | ----------------- | -------------------- | --------- |
+| Data form hilang saat validasi gagal | Memahami bahwa nilai input perlu diisi ulang (`value="..."`) dari `$_POST` agar pengguna tidak mengetik ulang. | Menambahkan `htmlspecialchars($_POST['nama'] ?? '')` pada atribut value setiap input. | Setelah error validasi, isian nama dan email tetap terisi. |
+| Validasi email tidak akurat | Memahami fungsi `filter_var()` dengan `FILTER_VALIDATE_EMAIL` untuk memeriksa format email. | Mengganti pengecekan manual `strpos('@')` dengan `filter_var()`. | Email seperti `budi@` ditolak, `budi@mail.com` diterima. |
+| Form bisa dikirim dengan kolom kosong | Memahami perbedaan `empty()`, `isset()`, dan `trim()` untuk mendeteksi input kosong atau hanya spasi. | Menggunakan `trim()` sebelum `empty()` pada semua kolom wajib. | Input berisi spasi saja ditolak dengan pesan error. |
+| Risiko XSS pada data yang ditampilkan | Memahami bahwa input pengguna harus di-escape sebelum dicetak ke HTML. | Membungkus semua output dengan `htmlspecialchars()`. | Input `<script>alert(1)</script>` tampil sebagai teks biasa. |
+| Pilihan kursus tidak terkirim | Memahami bahwa atribut `name` pada `<select>` dan radio button harus sama dengan key yang dibaca di PHP. | Menyamakan `name="course"` di form dengan `$_POST['course']` di `process-registration.php`. | Kursus yang dipilih muncul di halaman ringkasan. |
+| Perhitungan total biaya salah | Memahami pemakaian array harga per kursus dan konversi tipe dengan `(int)`. | Membuat array `$prices` dan menghitung total dari kursus serta metode belajar. | Total biaya sesuai hitungan manual untuk tiga skenario uji. |
+| Format rupiah tidak rapi | Memahami fungsi `number_format()` dengan pemisah ribuan titik. | Menampilkan harga dengan `'Rp ' . number_format($total, 0, ',', '.')`. | Harga tampil sebagai "Rp 450.000". |
+| Redirect setelah submit | Memahami pola Post/Redirect/Get dengan `header('Location: ...')` dan `exit`. | Menambahkan redirect ke `summary.php` setelah data diproses. | Refresh halaman ringkasan tidak memicu kirim ulang form. |
+| Dokumentasi bukti pengujian | Memahami cara mengambil screenshot halaman penuh dengan DevTools (Capture full size screenshot). | Mengambil screenshot form, pesan error, dan ringkasan sebagai bukti. | Semua screenshot tersimpan sebagai PNG di folder evidence. |
