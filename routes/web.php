@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CourseController;
 
-// (Mengarahkan URL '/' ke HomeController)
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Route Week 09: Form Pendaftaran Kursus
+Route::get('/register-course', [CourseController::class, 'create'])->name('course.register');
+Route::post('/register-course', [CourseController::class, 'store'])->name('course.store');
