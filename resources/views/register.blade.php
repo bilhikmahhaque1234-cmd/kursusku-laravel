@@ -129,6 +129,19 @@
             font-size: 0.9rem;
         }
 
+        /* Box Hijau Khas Sein untuk Sisa Kuota Kursus */
+        .quota-box {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #d1e7dd;
+            border: 1px solid #badbcc;
+            color: #0f5132;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
         .error-text {
             color: #ef4444;
             font-size: 0.83rem;
@@ -187,12 +200,38 @@
                     @error('kursus')
                         <span class="error-text">{{ $message }}</span>
                     @enderror
+
+                    {{-- Elemen penampung pesan sisa kuota --}}
+                    <div id="quota-box" class="quota-box"></div>
                 </div>
 
                 <button type="submit">Daftar Sekarang</button>
             </form>
         </div>
     </div>
+
+    {{-- Script Ajax/Fetch untuk memanggil API kuota secara otomatis --}}
+    <script>
+        document.getElementById('kursus').addEventListener('change', function () {
+            const courseName = this.value;
+            const box = document.getElementById('quota-box');
+
+            if (!courseName) {
+                box.style.display = 'none';
+                return;
+            }
+
+            fetch(`/api/course-availability?course=${encodeURIComponent(courseName)}`)
+                .then(response => response.json())
+                .then(data => {
+                    box.innerHTML = `<strong>${data.course}</strong> — Tersisa <strong>${data.remaining} kursi</strong>.`;
+                    box.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error fetching quota:', error);
+                });
+        });
+    </script>
 
 </body>
 </html>
