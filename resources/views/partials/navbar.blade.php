@@ -1,6 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container">
-        <a class="navbar-brand" href="/">KursusKu</a>
+        <!-- Logo & Nama Aplikasi -->
+        <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+            <img src="{{ asset('images/logo.jpg') }}" 
+                 alt="Logo KursusKu" 
+                 width="36" 
+                 height="36" 
+                 style="object-fit: cover; border-radius: 50%; display: inline-block;">
+            <span class="fw-bold">KursusKu</span>
+        </a>
 
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse" data-bs-target="#menuUtama"
