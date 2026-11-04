@@ -5,8 +5,12 @@ use App\Http\Controllers\CourseController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
-// Route Week 09: Form Pendaftaran Kursus
-Route::get('/register-course', [CourseController::class, 'create'])->name('course.register');
-Route::post('/register-course', [CourseController::class, 'store'])->name('course.store');
+// Resource Route untuk CRUD Course
+Route::resource('courses', CourseController::class);
+
+// Route untuk Halaman Pendaftaran (Mengarah ke register.blade.php)
+Route::get('/pendaftaran', function () {
+    return view('register');
+})->name('pendaftaran');

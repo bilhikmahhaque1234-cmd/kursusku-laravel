@@ -1,188 +1,206 @@
-/* KursusKu - Tema Laut (Samudra Animated) Week 7 */
+/* =========================================================
+   OCEANIC & DEEP SEA THEME - KURSUSKU
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --biru-tua: #0f4c81;       /* Biru laut dalam */
-    --biru-sedang: #1b6ca8;    /* Biru samudra */
-    --biru-muda: #e0f2fe;      /* Latar belakang dasar */
-    --oranye-terumbu: #f59e0b; /* Aksen oranye terumbu karang */
-    --teks-tua: #0c2a3a;       /* Warna teks utama */
-    --border-kartu: #bae6fd;   /* Garis tepi biru muda */
+  --ocean-deep: #0f172a;
+  --ocean-navy: #1e293b;
+  --ocean-blue: #0284c7;
+  --ocean-cyan: #06b6d4;
+  --ocean-foam: #e0f2fe;
+  --ocean-accent: #38bdf8;
+  --ocean-coral: #f43f5e;
+  --ocean-card-bg: #ffffff;
+  --ocean-text: #0f172a;
 }
 
-* { 
-    box-sizing: border-box; 
-}
-
-/* Background Bergerak Halus ala Gelombang Laut */
+/* Base Body Styling - Fresh Ocean Background */
 body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(-45deg, #e0f2fe, #bae6fd, #7dd3fc, #e0f2fe);
-    background-size: 400% 400%;
-    animation: gelombangLaut 12s ease infinite;
-    color: var(--teks-tua);
-    line-height: 1.6;
-    min-height: 100vh;
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
+  color: var(--ocean-text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Animasi Pergeseran Warna Air Laut */
-@keyframes gelombangLaut {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+/* Background Subtle Wave Accent */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 40%),
+              radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: -1;
 }
 
-.container {
-    width: min(1100px, 92%);
-    margin: 0 auto;
+/* Headings Styling */
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  color: #0c4a6e;
+  letter-spacing: -0.5px;
+  text-shadow: none;
 }
 
-/* Navbar Tema Laut */
-.navbar {
-    background: linear-gradient(135deg, var(--biru-tua), var(--biru-sedang));
-    color: white;
-    padding: 18px 0;
-    border-bottom: 4px solid var(--oranye-terumbu);
-    box-shadow: 0 4px 12px rgba(15, 76, 129, 0.2);
+/* Oceanic Navbar styling */
+.navbar, header.navbar, nav.navbar {
+  background: linear-gradient(90deg, #075985 0%, #0284c7 100%) !important;
+  border-bottom: 4px solid #38bdf8;
+  box-shadow: 0 4px 20px rgba(2, 132, 199, 0.25);
+  padding: 14px 0;
 }
 
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.navbar-brand {
+  color: #ffffff !important;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
-.navbar strong {
-    font-size: 1.4rem;
-    color: var(--oranye-terumbu);
-    letter-spacing: 0.5px;
+.nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 6px 16px !important;
+  border-radius: 20px;
+  transition: all 0.25s ease;
 }
 
-.navbar nav a {
-    text-decoration: none;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 6px;
-    transition: background-color 0.2s ease;
+.nav-link:hover, .nav-link.active {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
 }
 
-.navbar nav a:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+/* Oceanic Card Panel */
+.card, article.card {
+  background: var(--ocean-card-bg);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.1), 0 8px 10px -6px rgba(14, 165, 233, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  clip-path: none;
 }
 
-/* Hero Section */
-.hero {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 32px;
-    align-items: center;
-    padding: 56px 0;
+.card-header {
+  background: linear-gradient(90deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-bottom: 1px solid #bae6fd;
+  color: #0369a1;
+  font-weight: 700;
 }
 
-.hero p:first-child {
-    color: var(--biru-tua);
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
+/* Sea Water Table Styling */
+.table {
+  color: #334155;
 }
 
-.hero h1 {
-    color: var(--biru-tua);
-    font-size: 2.3rem;
-    margin-top: 0;
-    line-height: 1.2;
+.table thead, .table thead th {
+  background: linear-gradient(90deg, #0c4a6e 0%, #075985 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  border: none !important;
+  padding: 14px 12px;
 }
 
-.hero img {
-    width: 100%;
-    border-radius: 16px;
-    border: 3px solid var(--oranye-terumbu);
-    box-shadow: 0 10px 25px rgba(15, 76, 129, 0.25);
-    object-fit: cover;
-    /* Efek mengapung lembut pada gambar hero */
-    animation: mengapung 4s ease-in-out infinite;
+.table tbody tr {
+  transition: all 0.2s ease;
 }
 
-/* Animasi Mengapung (Floating) */
-@keyframes mengapung {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
+.table tbody tr:hover {
+  background-color: #f0f9ff !important;
+  box-shadow: none;
 }
 
-/* Section Title */
-main h2 {
-    color: var(--biru-tua);
-    border-left: 5px solid var(--oranye-terumbu);
-    padding-left: 12px;
-    margin-bottom: 24px;
+/* Oceanic Action Buttons */
+.btn-primary, .btn-danger {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  border: none;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 8px 18px;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+  transition: all 0.25s ease;
+  clip-path: none;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
-/* Kartu Kursus (Course Grid) */
-.course-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding-bottom: 48px;
+.btn-primary:hover, .btn-danger:hover {
+  background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.4);
 }
 
-.card {
-    background: rgba(255, 255, 255, 0.9); /* Kartu semi-transparan agar latar belakang laut terlihat */
-    backdrop-filter: blur(4px);
-    padding: 24px;
-    border-radius: 14px;
-    border: 1px solid var(--border-kartu);
-    border-top: 5px solid var(--oranye-terumbu);
-    box-shadow: 0 4px 15px rgba(12, 42, 58, 0.08);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+.btn-success {
+  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+  color: #ffffff;
+  border: none;
+  font-weight: 700;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
 }
 
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 22px rgba(15, 76, 129, 0.18);
+.btn-success:hover {
+  background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+  color: #ffffff;
 }
 
-.card small {
-    display: inline-block;
-    background-color: var(--biru-sedang);
-    color: white;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    margin-bottom: 12px;
+/* Form Controls / Inputs */
+.form-control, .form-select {
+  background-color: #ffffff !important;
+  border: 1.5px solid #7dd3fc !important;
+  color: #0f172a !important;
+  border-radius: 10px;
+  font-size: 1rem;
 }
 
-.card h3 {
-    color: var(--biru-tua);
-    margin: 8px 0;
+.form-control:focus, .form-select:focus {
+  background-color: #ffffff !important;
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15) !important;
 }
 
-.card p {
-    color: #374151;
-    font-size: 0.95rem;
-    margin-bottom: 0;
+/* Marine Badges */
+.badge {
+  font-weight: 700;
+  letter-spacing: 0;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
 }
 
-/* Responsive View (Tampilan Mobile) */
-@media (max-width: 760px) {
-    .hero,
-    .course-grid {
-        grid-template-columns: 1fr;
-    }
+.bg-success {
+  background-color: #dcfce7 !important;
+  color: #15803d !important;
+  border: 1px solid #86efac;
+  box-shadow: none;
+}
 
-    .hero h1 {
-        font-size: 1.8rem;
-    }
+.bg-warning {
+  background-color: #fef9c3 !important;
+  color: #a16207 !important;
+  border: 1px solid #fde047;
+  box-shadow: none;
+}
+
+.bg-secondary {
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+  border: 1px solid #7dd3fc;
+  box-shadow: none;
+}
+
+.bg-light {
+  background-color: #f1f5f9 !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1;
 }

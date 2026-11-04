@@ -14,6 +14,9 @@
                     <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Beranda</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->is('courses*') ? 'active' : '' }}" href="{{ route('courses.index') }}">Daftar Kursus</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ request()->is('pendaftaran*') ? 'active' : '' }}"
                        href="{{ url('/pendaftaran') }}">Pendaftaran</a>
                 </li>

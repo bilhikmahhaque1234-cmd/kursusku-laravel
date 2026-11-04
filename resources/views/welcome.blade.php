@@ -43,6 +43,10 @@
             font-size: 0.95rem;
         }
 
+        nav a.active {
+            color: #f59e0b; /* Warna Oranye untuk Menu Aktif */
+        }
+
         /* Container Beranda */
         .container {
             max-width: 1000px;
@@ -156,7 +160,8 @@
     <header>
         <a href="/" class="logo">Kursusku</a>
         <nav>
-            <a href="/">Beranda</a>
+            <a href="/" class="active">Beranda</a>
+            <a href="{{ route('courses.index') }}">Daftar Kursus</a>
             <a href="/register-course">Pendaftaran</a>
         </nav>
     </header>

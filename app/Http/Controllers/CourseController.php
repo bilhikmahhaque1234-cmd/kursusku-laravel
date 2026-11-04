@@ -2,42 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+    public function index()
+    {
+        $courses = Course::latest()->get();
+        return view('courses.index', compact('courses'));
+    }
+
     public function create()
     {
-        return view('register');
+        return view('courses.create');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nama'   => 'required|min:3',
-            'email'  => 'required|email',
-            'kursus' => 'required'
+        $data = $request->validate([
+            'code'        => ['required', 'max:20', 'unique:courses,code'],
+            'name'        => ['required', 'max:120'],
+            'description' => ['nullable', 'string'],
+            'fee'         => ['required', 'integer', 'min:0'],
+            'quota'       => ['required', 'integer', 'min:1', 'max:500'],
+            'start_date'  => ['required', 'date'],
+            'status'      => ['required', 'in:draft,open,closed'],
         ]);
 
-        return back()->with('success', 'Pendaftaran kursus berhasil dikirim!');
-    }
+        Course::create($data);
 
-    // Method Ajax untuk Cek Sisa Kursi
-    public function checkAvailability(Request $request)
-    {
-        $data = [
-            'Laravel Framework'       => 4,
-            'PHP Native Fundamentals' => 8,
-            'Web Design & UI/UX'      => 12
-        ];
-
-        $kursus = $request->get('course');
-        $remaining = $data[$kursus] ?? 0;
-
-        return response()->json([
-            'course'    => $kursus,
-            'remaining' => $remaining,
-            'status'    => 'open'
-        ]);
+        return to_route('courses.index')
+            ->with('success', 'Kursus berhasil ditambahkan.');
     }
 }

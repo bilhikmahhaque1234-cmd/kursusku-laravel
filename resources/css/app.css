@@ -16,11 +16,20 @@
     --pp-brown: var(--teks);
 }
 
+* { 
+    box-sizing: border-box; 
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: var(--utama-muda);
     color: var(--teks);
+}
+
+.container {
+    width: min(1100px, 92%);
+    margin: 0 auto;
 }
 
 /* Navbar */
@@ -31,28 +40,10 @@ body {
     border-bottom: 4px solid var(--utama);
 }
 
-.navbar-custom .navbar-brand {
+.navbar-brand {
     color: var(--utama) !important;
     font-weight: 800;
     font-size: 1.3rem;
-}
-
-.navbar-custom .nav-link {
-    color: white !important;
-    font-weight: 600;
-}
-
-.navbar-custom .nav-link:hover,
-.navbar-custom .nav-link.active {
-    color: var(--utama) !important;
-}
-
-.navbar-custom .navbar-toggler {
-    border-color: var(--utama);
-}
-
-.navbar-custom .navbar-toggler-icon {
-    filter: invert(1);
 }
 
 /* Hero */
