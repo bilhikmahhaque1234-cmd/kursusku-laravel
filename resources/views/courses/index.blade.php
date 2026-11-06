@@ -18,6 +18,14 @@
     </div>
 </div>
 
+{{-- Pesan Sukses (Flash Message) setelah Tambah, Edit, atau Hapus --}}
+@if (session('success'))
+    <div class="alert alert-success border-0 shadow-sm alert-dismissible fade show mb-4" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 <div class="card shadow-sm border-0">
     <div class="card-body p-0">
         <div class="table-responsive">
@@ -31,6 +39,7 @@
                         <th class="text-center py-3">KUOTA</th>
                         <th class="py-3">TANGGAL MULAI</th>
                         <th class="text-center py-3">STATUS</th>
+                        <th class="text-center py-3" style="width: 180px;">AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,7 +58,6 @@
                                 @endif
                             </td>
                             <td class="fw-bold text-danger">
-                                {{-- DIPERBAIKI: Menggunakan $course->fee (bukan $course->price) --}}
                                 Rp {{ number_format($course->fee, 0, ',', '.') }}
                             </td>
                             <td class="text-center">
@@ -68,10 +76,28 @@
                                     <span class="badge bg-secondary px-3 py-2">{{ ucfirst($course->status) }}</span>
                                 @endif
                             </td>
+                            <td class="text-center">
+                                {{-- Tombol Detail, Edit, dan Form Hapus --}}
+                                <div class="d-flex gap-1 justify-content-center flex-wrap">
+                                    <a href="{{ route('courses.show', $course) }}" class="btn btn-sm btn-outline-primary">
+                                        Detail
+                                    </a>
+                                    <a href="{{ route('courses.edit', $course) }}" class="btn btn-sm btn-outline-warning">
+                                        Edit
+                                    </a>
+                                    <form method="POST" action="{{ route('courses.destroy', $course) }}" onsubmit="return confirm('Hapus kursus ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="text-center py-4 text-muted">
+                            <td colspan="8" class="text-center py-4 text-muted">
                                 Belum ada data kursus yang tersedia.
                             </td>
                         </tr>
