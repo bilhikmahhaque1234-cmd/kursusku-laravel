@@ -1,206 +1,753 @@
-/* =========================================================
-   OCEANIC & DEEP SEA THEME - KURSUSKU
-   ========================================================= */
+/* ==========================================================================
+   KURSUSKU - TEMA PERSONA 3 RELOAD
+   Diadaptasi dari css/style.css milik porto-persona3 (palet, font Rodin,
+   bentuk miring, glow cyan, background laut + grid, dan vignette sisi).
+   Dipakai bersama Bootstrap 5.3 (layout memakai data-bs-theme="dark").
+   ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+/* --------------------------------------------------------------------------
+   Font (subset Latin dari Rodin Pro)
+   -------------------------------------------------------------------------- */
+@font-face {
+    font-family: "Rodin Pro Bold";
+    src: url("../fonts/RodinPro-UB.woff") format("woff");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
 
+@font-face {
+    font-family: "Rodin Pro Medium";
+    src: url("../fonts/RodinPro-DB.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* --------------------------------------------------------------------------
+   Design tokens (sama dengan :root pada porto-persona3)
+   -------------------------------------------------------------------------- */
 :root {
-  --ocean-deep: #0f172a;
-  --ocean-navy: #1e293b;
-  --ocean-blue: #0284c7;
-  --ocean-cyan: #06b6d4;
-  --ocean-foam: #e0f2fe;
-  --ocean-accent: #38bdf8;
-  --ocean-coral: #f43f5e;
-  --ocean-card-bg: #ffffff;
-  --ocean-text: #0f172a;
+    --color-fg: #ffffff;
+    --color-bg: #015fcc;
+    --color-bg-dark: #031f64;
+    --color-base: #001233;
+    --color-red: #e60024;
+    --color-muted: rgba(255, 255, 255, 0.4);
+    --color-pink: #fd77d9;
+
+    --color-button-1: #16cffb;
+    --color-button-2: #7de6fd;
+    --color-button-3: #77fefc;
+
+    --color-border: #5d6a88;
+    --color-panel: #041630;
+
+    --font-rodin: "Rodin Pro Bold", "Poppins", "Segoe UI", system-ui, sans-serif;
+    --font-rodin-medium: "Rodin Pro Medium", "Poppins", "Segoe UI", system-ui, sans-serif;
+
+    --text-shadow-glow: 0 2px 15px rgba(0, 0, 0, 0.3), 0 0 25px rgba(22, 207, 251, 0.6);
+
+    /* Variabel Bootstrap */
+    --bs-body-font-family: var(--font-rodin-medium);
+    --bs-body-color: #ffffff;
+    --bs-body-bg: var(--color-base);
+    --bs-secondary-color: rgba(255, 255, 255, 0.72);
+    --bs-border-color: rgba(255, 255, 255, 0.35);
+    --bs-link-color: var(--color-button-2);
+    --bs-link-hover-color: #ffffff;
+    --bs-link-color-rgb: 125, 230, 253;
+    --bs-link-hover-color-rgb: 255, 255, 255;
 }
 
-/* Base Body Styling - Fresh Ocean Background */
+/* --------------------------------------------------------------------------
+   Base + BACKGROUND (gradient laut + grid, seperti loading screen P3R)
+   -------------------------------------------------------------------------- */
+html {
+    min-height: 100%;
+    background-color: var(--color-base);
+}
+
 body {
-  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
-  color: var(--ocean-text);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
+    min-height: 100vh;
+    margin: 0;
+    color: var(--color-fg);
+    font-family: var(--font-rodin-medium);
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--color-base);
+    background-image: radial-gradient(circle at 85% 85%, #16cffb 0%, #0099ff 28%, #015fcc 62%, #003a8c 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-/* Background Subtle Wave Accent */
+/* Grid halus 40px */
 body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 40%),
-              radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 40%);
-  pointer-events: none;
-  z-index: -1;
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
 }
 
-/* Headings Styling */
-h1, h2, h3, h4, h5, h6, .navbar-brand {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 800;
-  color: #0c4a6e;
-  letter-spacing: -0.5px;
-  text-shadow: none;
+/* Vignette hitam pudar di sisi halaman (.p3r-global-vignette) */
+.p3r-global-vignette {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    background:
+        linear-gradient(to right, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.25) 3.5%, transparent 12%, transparent 88%, rgba(0, 0, 0, 0.25) 96.5%, rgba(0, 0, 0, 0.6) 100%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0%, transparent 5%, transparent 95%, rgba(0, 0, 0, 0.45) 100%);
 }
 
-/* Oceanic Navbar styling */
-.navbar, header.navbar, nav.navbar {
-  background: linear-gradient(90deg, #075985 0%, #0284c7 100%) !important;
-  border-bottom: 4px solid #38bdf8;
-  box-shadow: 0 4px 20px rgba(2, 132, 199, 0.25);
-  padding: 14px 0;
+main {
+    position: relative;
+    z-index: 2;
 }
 
-.navbar-brand {
-  color: #ffffff !important;
-  font-size: 1.4rem;
-  font-weight: 800;
-  letter-spacing: 0.5px;
+::selection {
+    background: var(--color-button-1);
+    color: var(--color-bg-dark);
 }
 
-.nav-link {
-  color: rgba(255, 255, 255, 0.9) !important;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 6px 16px !important;
-  border-radius: 20px;
-  transition: all 0.25s ease;
+a {
+    text-decoration: none;
 }
 
-.nav-link:hover, .nav-link.active {
-  color: #ffffff !important;
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
+/* --------------------------------------------------------------------------
+   Tipografi
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6,
+.cyber-font {
+    font-family: var(--font-rodin) !important;
+    font-style: italic;
+    font-weight: 900 !important;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 3px 18px rgba(0, 0, 0, 0.55), 0 0 22px rgba(22, 207, 251, 0.55);
 }
 
-/* Oceanic Card Panel */
-.card, article.card {
-  background: var(--ocean-card-bg);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.1), 0 8px 10px -6px rgba(14, 165, 233, 0.1);
-  border-radius: 16px;
-  overflow: hidden;
-  clip-path: none;
+/* Judul section: garis aksen seperti .profile-accent-line */
+main > h2,
+main > .d-flex h2,
+.section-title {
+    position: relative;
+}
+
+.title-bar {
+    width: 6px;
+    height: 30px;
+    margin-right: 14px;
+    background: linear-gradient(to bottom, var(--color-button-1) 0%, var(--color-button-1) 70%, var(--color-red) 70%);
+    box-shadow: 0 0 12px rgba(22, 207, 251, 0.9);
+    transform: skewX(-12deg);
+}
+
+label,
+.form-label {
+    font-family: var(--font-rodin);
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.text-muted,
+.text-secondary,
+small.text-muted {
+    color: rgba(255, 255, 255, 0.72) !important;
+}
+
+.text-success { color: var(--color-button-3) !important; }
+.text-info    { color: var(--color-button-2) !important; }
+.text-warning { color: var(--color-pink) !important; }
+.text-primary { color: var(--color-button-1) !important; }
+.text-danger  { color: #ff6b87 !important; }
+.text-dark:not(.badge) { color: #ffffff !important; }
+.text-light   { color: #ffffff !important; }
+
+/* --------------------------------------------------------------------------
+   NAVBAR (menu P3R: miring, aktif = putih + aksen merah)
+   -------------------------------------------------------------------------- */
+.navbar-custom {
+    position: relative;
+    z-index: 10;
+    padding: 0.7rem 0;
+    background: linear-gradient(90deg, #020914 0%, #041224 55%, #061c3b 100%) !important;
+    border-bottom: 3px solid var(--color-button-1);
+    box-shadow: 0 4px 0 rgba(255, 255, 255, 0.9), 0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+.navbar-custom .navbar-brand {
+    font-family: var(--font-rodin);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    text-shadow: var(--text-shadow-glow);
+}
+
+.navbar-custom .navbar-brand img {
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 12px rgba(22, 207, 251, 0.8);
+}
+
+.navbar-custom .nav-link {
+    position: relative;
+    margin-left: 0.35rem;
+    padding: 0.45rem 1.2rem !important;
+    font-family: var(--font-rodin);
+    font-style: italic;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: #ffffff !important;
+    isolation: isolate;
+    transition: color 0.15s ease;
+}
+
+.navbar-custom .nav-link::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: transparent;
+    transform: skewX(-18deg);
+    transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.navbar-custom .nav-link:hover::before {
+    background: rgba(22, 207, 251, 0.35);
+}
+
+.navbar-custom .nav-link.active {
+    color: var(--color-bg-dark) !important;
+}
+
+.navbar-custom .nav-link.active::before {
+    background: linear-gradient(90deg, #ffffff 0%, #f4f9ff 100%);
+    border-right: 6px solid var(--color-red);
+    box-shadow: 0 0 14px rgba(22, 207, 251, 0.6);
+}
+
+/* --------------------------------------------------------------------------
+   CARD (gaya .modal-card)
+   -------------------------------------------------------------------------- */
+.card {
+    --bs-card-bg: transparent;
+    --bs-card-color: #ffffff;
+    --bs-card-cap-bg: transparent;
+    --bs-card-border-width: 0;
+    background: linear-gradient(135deg, rgba(1, 95, 204, 0.95), rgba(3, 31, 100, 0.98));
+    border: 3px solid var(--color-fg);
+    outline: 4px solid var(--color-border);
+    border-radius: 0.75rem;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), 0 0 40px rgba(22, 207, 251, 0.3);
+    color: #ffffff;
+    overflow: hidden;
 }
 
 .card-header {
-  background: linear-gradient(90deg, #f0f9ff 0%, #e0f2fe 100%);
-  border-bottom: 1px solid #bae6fd;
-  color: #0369a1;
-  font-weight: 700;
+    background: #ffffff !important;
+    color: var(--color-bg-dark) !important;
+    border: 0;
+    border-bottom: 4px solid var(--color-red);
+    font-family: var(--font-rodin);
+    font-style: italic;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    padding: 0.85rem 1.5rem;
+    text-shadow: none;
 }
 
-/* Sea Water Table Styling */
-.table {
-  color: #334155;
+.card-title {
+    color: var(--color-button-3);
 }
 
-.table thead, .table thead th {
-  background: linear-gradient(90deg, #0c4a6e 0%, #075985 100%) !important;
-  color: #ffffff !important;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.5px;
-  border: none !important;
-  padding: 14px 12px;
+.card-text {
+    color: rgba(255, 255, 255, 0.85);
 }
 
-.table tbody tr {
-  transition: all 0.2s ease;
+/* Banner detail kursus (show) */
+.course-banner {
+    background: linear-gradient(135deg, #0099ff 0%, #015fcc 55%, #031f64 100%) !important;
+    border-bottom: 4px solid var(--color-red) !important;
+    position: relative;
 }
 
-.table tbody tr:hover {
-  background-color: #f0f9ff !important;
-  box-shadow: none;
+.course-banner::after {
+    content: "";
+    position: absolute;
+    right: -40px;
+    top: 0;
+    bottom: 0;
+    width: 160px;
+    background: var(--color-button-1);
+    opacity: 0.25;
+    transform: skewX(-20deg);
+    pointer-events: none;
 }
 
-/* Oceanic Action Buttons */
-.btn-primary, .btn-danger {
-  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-  color: #ffffff;
-  border: none;
-  font-weight: 700;
-  border-radius: 10px;
-  padding: 8px 18px;
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
-  transition: all 0.25s ease;
-  clip-path: none;
-  letter-spacing: 0;
-  text-transform: none;
+/* Kotak info (menggantikan bg-light) */
+.info-tile {
+    padding: 1rem 1.25rem;
+    background: var(--color-panel);
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    border-left: 6px solid var(--color-button-1);
+    border-radius: 0.35rem;
+    transform: skewX(-6deg);
 }
 
-.btn-primary:hover, .btn-danger:hover {
-  background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.4);
+.info-tile > * {
+    transform: skewX(6deg);
+}
+
+.info-tile small {
+    color: var(--color-button-2) !important;
+    font-family: var(--font-rodin);
+    font-style: italic;
+}
+
+hr {
+    border-color: #ffffff;
+    opacity: 0.35;
+}
+
+/* --------------------------------------------------------------------------
+   BUTTON (bentuk miring lewat ::before supaya teks tetap tegak)
+   -------------------------------------------------------------------------- */
+.btn {
+    --b-bg: var(--color-button-1);
+    --b-bg-hover: #7de6fd;
+    --b-fg: var(--color-bg-dark);
+    --b-fg-hover: var(--color-bg-dark);
+    --b-border: var(--color-button-1);
+    --b-glow: rgba(22, 207, 251, 0.75);
+
+    position: relative;
+    isolation: isolate;
+    padding: 0.5rem 1.4rem;
+    border: 0 !important;
+    border-radius: 0;
+    background: transparent !important;
+    color: var(--b-fg) !important;
+    font-family: var(--font-rodin);
+    font-style: italic;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--b-bg);
+    border: 2px solid var(--b-border);
+    transform: skewX(-12deg);
+    transition: background 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:hover,
+.btn:focus-visible,
+.btn:active {
+    color: var(--b-fg-hover) !important;
+    transform: translateX(3px);
+}
+
+.btn:hover::before,
+.btn:focus-visible::before {
+    background: var(--b-bg-hover);
+    box-shadow: 0 0 18px var(--b-glow);
+}
+
+.btn:focus,
+.btn:focus-visible {
+    box-shadow: none;
+}
+
+.btn-sm {
+    padding: 0.28rem 0.9rem;
+    font-size: 0.8rem;
+}
+
+/* Tombol di dalam tabel dibuat lebih ringkas supaya satu baris */
+.table .btn-sm {
+    padding: 0.22rem 0.7rem;
+    font-size: 0.72rem;
+}
+
+.table thead th:last-child {
+    min-width: 250px;
+}
+
+.table td .d-flex.gap-1 {
+    flex-wrap: nowrap !important;
+    gap: 0.5rem !important;
+}
+
+.btn-outline-primary,
+.btn-outline-light {
+    --b-bg: rgba(3, 31, 100, 0.85);
+    --b-bg-hover: #ffffff;
+    --b-fg: #ffffff;
+    --b-fg-hover: var(--color-bg-dark);
+    --b-border: #ffffff;
+    --b-glow: rgba(255, 255, 255, 0.6);
+}
+
+.btn-outline-primary {
+    --b-fg: var(--color-button-1);
+    --b-border: var(--color-button-1);
+    --b-bg-hover: var(--color-button-1);
+}
+
+.btn-warning {
+    --b-bg: var(--color-pink);
+    --b-bg-hover: #ffa6ea;
+    --b-fg: var(--color-bg-dark);
+    --b-fg-hover: var(--color-bg-dark);
+    --b-border: var(--color-pink);
+    --b-glow: rgba(253, 119, 217, 0.75);
+}
+
+.btn-outline-warning {
+    --b-bg: rgba(3, 31, 100, 0.85);
+    --b-bg-hover: var(--color-pink);
+    --b-fg: var(--color-pink);
+    --b-fg-hover: var(--color-bg-dark);
+    --b-border: var(--color-pink);
+    --b-glow: rgba(253, 119, 217, 0.75);
+}
+
+.btn-danger {
+    --b-bg: var(--color-red);
+    --b-bg-hover: #ff2a4a;
+    --b-fg: #ffffff;
+    --b-fg-hover: #ffffff;
+    --b-border: #ffffff;
+    --b-glow: rgba(255, 0, 40, 0.7);
+}
+
+.btn-outline-danger {
+    --b-bg: rgba(3, 31, 100, 0.85);
+    --b-bg-hover: var(--color-red);
+    --b-fg: #ff6b87;
+    --b-fg-hover: #ffffff;
+    --b-border: var(--color-red);
+    --b-glow: rgba(255, 0, 40, 0.7);
+}
+
+.btn-secondary,
+.btn-dark {
+    --b-bg: var(--color-panel);
+    --b-bg-hover: #0a2a5c;
+    --b-fg: #ffffff;
+    --b-fg-hover: #ffffff;
+    --b-border: #ffffff;
 }
 
 .btn-success {
-  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
-  color: #ffffff;
-  border: none;
-  font-weight: 700;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+    --b-bg: var(--color-button-3);
+    --b-bg-hover: #b6fffe;
+    --b-border: var(--color-button-3);
 }
 
-.btn-success:hover {
-  background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
-  color: #ffffff;
+.btn-link {
+    --b-fg: var(--color-button-2);
+    --b-fg-hover: #ffffff;
+    text-decoration: none;
 }
 
-/* Form Controls / Inputs */
-.form-control, .form-select {
-  background-color: #ffffff !important;
-  border: 1.5px solid #7dd3fc !important;
-  color: #0f172a !important;
-  border-radius: 10px;
-  font-size: 1rem;
+.btn-link::before {
+    display: none;
 }
 
-.form-control:focus, .form-select:focus {
-  background-color: #ffffff !important;
-  border-color: #0284c7 !important;
-  box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15) !important;
+/* Tombol khusus halaman beranda (span di dalam ditegakkan lagi) */
+.btn-cyber-primary,
+.btn-cyber-outline {
+    display: inline-block;
+    padding: 0.7rem 1.7rem;
+    font-family: var(--font-rodin);
+    font-style: italic;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-decoration: none;
+    transform: skewX(-12deg);
+    transition: all 0.2s ease;
 }
 
-/* Marine Badges */
+.btn-cyber-primary span,
+.btn-cyber-outline span {
+    display: inline-block;
+    transform: skewX(12deg);
+}
+
+.btn-cyber-primary {
+    background: var(--color-button-1);
+    color: var(--color-bg-dark) !important;
+    border: 2px solid var(--color-button-1);
+}
+
+.btn-cyber-primary:hover {
+    background: var(--color-button-2);
+    box-shadow: 0 0 20px rgba(22, 207, 251, 0.8);
+    transform: skewX(-12deg) translateX(4px);
+}
+
+.btn-cyber-outline {
+    background: rgba(3, 31, 100, 0.7);
+    color: #ffffff !important;
+    border: 2px solid #ffffff;
+}
+
+.btn-cyber-outline:hover {
+    background: #ffffff;
+    color: var(--color-bg-dark) !important;
+    transform: skewX(-12deg) translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   BADGE
+   -------------------------------------------------------------------------- */
 .badge {
-  font-weight: 700;
-  letter-spacing: 0;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 0.8rem;
+    border-radius: 0;
+    font-family: var(--font-rodin);
+    font-style: italic;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    transform: skewX(-12deg);
+    border: 2px solid transparent;
 }
 
-.bg-success {
-  background-color: #dcfce7 !important;
-  color: #15803d !important;
-  border: 1px solid #86efac;
-  box-shadow: none;
+.badge.bg-success { background: var(--color-button-3) !important; color: var(--color-bg-dark) !important; border-color: #ffffff; }
+.badge.bg-warning { background: var(--color-pink) !important;    color: var(--color-bg-dark) !important; border-color: #ffffff; }
+.badge.bg-danger  { background: var(--color-red) !important;     color: #ffffff !important;            border-color: #ffffff; }
+.badge.bg-info    { background: var(--color-button-2) !important; color: var(--color-bg-dark) !important; border-color: #ffffff; }
+.badge.bg-secondary,
+.badge.bg-dark    { background: var(--color-panel) !important;   color: #ffffff !important;            border-color: rgba(255, 255, 255, 0.85); }
+
+.badge.border-success { border-color: var(--color-button-1) !important; }
+.badge.bg-dark.text-success { color: var(--color-button-3) !important; }
+
+.badge-code {
+    display: inline-block;
+    padding: 0.35em 0.8em;
+    background: var(--color-panel);
+    color: var(--color-button-1);
+    border: 2px solid var(--color-button-1);
+    font-family: var(--font-rodin);
+    letter-spacing: 0.02em;
 }
 
-.bg-warning {
-  background-color: #fef9c3 !important;
-  color: #a16207 !important;
-  border: 1px solid #fde047;
-  box-shadow: none;
+.badge.bg-secondary.fs-6 strong {
+    color: var(--color-button-3);
 }
 
-.bg-secondary {
-  background-color: #e0f2fe !important;
-  color: #0369a1 !important;
-  border: 1px solid #7dd3fc;
-  box-shadow: none;
+/* --------------------------------------------------------------------------
+   TABEL
+   -------------------------------------------------------------------------- */
+.table {
+    --bs-table-color: #ffffff;
+    --bs-table-bg: transparent;
+    --bs-table-border-color: rgba(255, 255, 255, 0.18);
+    --bs-table-hover-color: #ffffff;
+    --bs-table-hover-bg: rgba(22, 207, 251, 0.2);
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.04);
+    margin-bottom: 0;
 }
 
-.bg-light {
-  background-color: #f1f5f9 !important;
-  color: #334155 !important;
-  border: 1px solid #cbd5e1;
+.table thead th {
+    background: var(--color-panel) !important;
+    color: var(--color-button-1) !important;
+    font-family: var(--font-rodin);
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    border-bottom: 3px solid var(--color-red);
+    text-shadow: none;
+    white-space: nowrap;
+}
+
+.table tbody td {
+    background: rgba(2, 9, 20, 0.35);
+    vertical-align: middle;
+}
+
+.table-hover > tbody > tr:hover > * {
+    box-shadow: inset 0 0 0 9999px rgba(22, 207, 251, 0.18);
+}
+
+/* --------------------------------------------------------------------------
+   FORM
+   -------------------------------------------------------------------------- */
+:root { color-scheme: dark; }
+
+.form-control,
+.form-select {
+    background-color: rgba(2, 12, 40, 0.85);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    border-radius: 0;
+    padding: 0.6rem 0.9rem;
+    font-family: var(--font-rodin-medium);
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: rgba(2, 12, 40, 0.95);
+    color: #ffffff;
+    border-color: var(--color-button-1);
+    box-shadow: 0 0 0 3px rgba(22, 207, 251, 0.3), 0 0 16px rgba(22, 207, 251, 0.5);
+}
+
+.form-select option {
+    background: var(--color-bg-dark);
+    color: #ffffff;
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: var(--color-red);
+    box-shadow: 0 0 0 3px rgba(230, 0, 36, 0.25);
+}
+
+.invalid-feedback {
+    color: #ff8aa0;
+    font-weight: 700;
+}
+
+.error-text {
+    color: #ff8aa0;
+    font-weight: 700;
+    font-size: 0.82rem;
+}
+
+/* --------------------------------------------------------------------------
+   ALERT
+   -------------------------------------------------------------------------- */
+.alert {
+    border-radius: 0;
+    border: 2px solid var(--color-button-1);
+    border-left-width: 8px;
+    background: rgba(3, 31, 100, 0.9);
+    color: #ffffff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.alert-success,
+.alert-info {
+    border-color: var(--color-button-1);
+    background: rgba(3, 31, 100, 0.92);
+    color: #ffffff;
+}
+
+.alert-danger {
+    border-color: var(--color-red);
+    background: rgba(60, 0, 20, 0.9);
+}
+
+.alert-warning {
+    border-color: var(--color-pink);
+    background: rgba(60, 10, 50, 0.9);
+}
+
+/* --------------------------------------------------------------------------
+   KOMPONEN BERANDA (welcome.blade.php)
+   -------------------------------------------------------------------------- */
+.cyber-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(1, 95, 204, 0.95), rgba(3, 31, 100, 0.98));
+    border: 3px solid #ffffff;
+    outline: 4px solid var(--color-border);
+    border-left: 10px solid var(--color-red);
+    border-radius: 0.5rem;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), 0 0 40px rgba(22, 207, 251, 0.3);
+}
+
+.cyber-stat-box {
+    background: var(--color-panel);
+    border: 2px solid #ffffff;
+    border-right: 8px solid var(--color-red);
+    padding: 1.2rem;
+    border-radius: 0;
+    transform: skewX(-8deg);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cyber-stat-box:hover {
+    transform: skewX(-8deg) translateX(8px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), 0 0 22px rgba(22, 207, 251, 0.6);
+}
+
+.cyber-stat-content {
+    transform: skewX(8deg);
+}
+
+.cyber-stat-box small {
+    color: var(--color-button-2) !important;
+    font-family: var(--font-rodin);
+    font-style: italic;
+    letter-spacing: 0.04em;
+}
+
+.course-card-cyber {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-card-cyber:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55), 0 0 28px rgba(22, 207, 251, 0.7);
+}
+
+/* Elemen lama halaman home.blade.php */
+.hero img,
+.hero-img {
+    border: 3px solid #ffffff;
+    outline: 4px solid var(--color-border);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+/* --------------------------------------------------------------------------
+   Scrollbar (gaya .p3r-skills-container)
+   -------------------------------------------------------------------------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: rgba(2, 11, 24, 0.6); }
+::-webkit-scrollbar-thumb { background: var(--color-button-1); }
+
+/* --------------------------------------------------------------------------
+   Responsif
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+    .navbar-custom .nav-link { margin: 0.2rem 0; }
+    .cyber-stat-box,
+    .info-tile { transform: none; }
+    .cyber-stat-content,
+    .info-tile > * { transform: none; }
+    .cyber-stat-box:hover { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
 }

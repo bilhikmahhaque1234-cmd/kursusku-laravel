@@ -47,7 +47,7 @@
                         <tr>
                             <td class="text-center fw-bold">{{ $index + 1 }}</td>
                             <td>
-                                <span class="badge bg-light text-dark border font-monospace fs-6">
+                                <span class="badge-code">
                                     {{ $course->code }}
                                 </span>
                             </td>

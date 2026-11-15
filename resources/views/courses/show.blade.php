@@ -33,12 +33,12 @@
     </div>
 
     {{-- Main Detail Card --}}
-    <div class="card border-0 shadow-lg overflow-hidden" style="border-radius: 16px;">
+    <div class="card border-0 shadow-lg overflow-hidden" >
         {{-- Card Banner Top --}}
-        <div class="card-header border-0 py-4 px-4 px-md-5" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);">
+        <div class="card-header course-banner border-0 py-4 px-4 px-md-5">
             <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
                 <div>
-                    <span class="badge bg-light text-primary font-monospace px-3 py-2 fs-6 mb-2 shadow-sm">
+                    <span class="badge-code fs-6 mb-2">
                         {{ $course->code }}
                     </span>
                     <h2 class="fw-bold text-white mb-1">{{ $course->name }}</h2>
@@ -59,8 +59,8 @@
         <div class="card-body p-4 p-md-5">
             {{-- Description Section --}}
             <div class="mb-5">
-                <h5 class="fw-bold text-primary mb-2">Deskripsi Kursus</h5>
-                <p class="text-secondary fs-6 leading-relaxed mb-0">
+                <h5 class="fw-bold text-info mb-2">Deskripsi Kursus</h5>
+                <p class="text-light fs-6 leading-relaxed mb-0">
                     {{ $course->description ?: 'Tidak ada deskripsi tambahan untuk kursus ini.' }}
                 </p>
             </div>
@@ -70,7 +70,7 @@
             {{-- Grid Info Details --}}
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="p-3 rounded-3 bg-light border border-light">
+                    <div class="info-tile">
                         <small class="text-muted d-block fw-semibold text-uppercase fs-7 mb-1">Biaya Pendaftaran</small>
                         <h4 class="fw-bold text-success mb-0">
                             Rp {{ number_format($course->fee, 0, ',', '.') }}
@@ -79,18 +79,18 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="p-3 rounded-3 bg-light border border-light">
+                    <div class="info-tile">
                         <small class="text-muted d-block fw-semibold text-uppercase fs-7 mb-1">Kuota Peserta</small>
-                        <h4 class="fw-bold text-dark mb-0">
+                        <h4 class="fw-bold text-white mb-0">
                             {{ $course->quota }} <span class="fs-6 fw-normal text-muted">Peserta</span>
                         </h4>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="p-3 rounded-3 bg-light border border-light">
+                    <div class="info-tile">
                         <small class="text-muted d-block fw-semibold text-uppercase fs-7 mb-1">Tanggal Pelaksanaan</small>
-                        <h4 class="fw-bold text-dark mb-0">
+                        <h4 class="fw-bold text-white mb-0">
                             {{ \Carbon\Carbon::parse($course->start_date)->format('d M Y') }}
                         </h4>
                     </div>
