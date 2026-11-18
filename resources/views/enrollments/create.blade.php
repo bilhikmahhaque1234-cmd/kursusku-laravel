@@ -41,6 +41,9 @@
                         @error('course_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+
+                        {{-- Box penampung sisa kuota kursus --}}
+                        <div id="quota-box" class="alert alert-info mt-3 mb-0 py-2 px-3" style="display: none;"></div>
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100 fw-bold py-2">Simpan Enrollment</button>
@@ -50,4 +53,37 @@
         </div>
     </div>
 </div>
+
+{{-- Script Fetch Kuota --}}
+<script>
+    const courseSelect = document.getElementById('course_id');
+    const quotaBox = document.getElementById('quota-box');
+
+    function loadQuota() {
+        const courseId = courseSelect.value;
+
+        if (!courseId) {
+            quotaBox.style.display = 'none';
+            return;
+        }
+
+        fetch(`{{ route('course.availability') }}?course=${encodeURIComponent(courseId)}`, { headers: { 'Accept': 'application/json' } })
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.json();
+            })
+            .then(data => {
+                quotaBox.innerHTML = `<strong>${data.course}</strong> — Tersisa <strong>${data.remaining} kursi</strong> dari ${data.quota}.`;
+                quotaBox.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error fetching quota:', error);
+                quotaBox.textContent = 'Gagal memuat sisa kuota.';
+                quotaBox.style.display = 'block';
+            });
+    }
+
+    courseSelect.addEventListener('change', loadQuota);
+    loadQuota();
+</script>
 @endsection

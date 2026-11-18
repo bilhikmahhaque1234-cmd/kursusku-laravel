@@ -16,7 +16,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('courses.store') }}" method="POST">
+                <form action="{{ route('pendaftaran.store') }}" method="POST">
                     @csrf
                     
                     <div class="mb-3">
@@ -39,9 +39,9 @@
                         <label for="kursus" class="form-label fw-bold">Pilihan Kursus *</label>
                         <select class="form-select @error('kursus') is-invalid @enderror" id="kursus" name="kursus">
                             <option value="">-- Pilih Program Kursus --</option>
-                            <option value="Laravel Fundamental" {{ old('kursus') == 'Laravel Fundamental' ? 'selected' : '' }}>LAR-01 — Laravel Fundamental</option>
-                            <option value="PHP Dasar" {{ old('kursus') == 'PHP Dasar' ? 'selected' : '' }}>PHP-01 — PHP Dasar</option>
-                            <option value="Web Dasar" {{ old('kursus') == 'Web Dasar' ? 'selected' : '' }}>WEB-01 — Web Dasar</option>
+                            @foreach($courses as $course)
+                                <option value="{{ $course->id }}" {{ old('kursus') == $course->id ? 'selected' : '' }}>{{ $course->code }} — {{ $course->name }}</option>
+                            @endforeach
                         </select>
                         @error('kursus')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -61,23 +61,32 @@
 {{-- Script Ajax/Fetch Kuota --}}
 <script>
     document.getElementById('kursus').addEventListener('change', function () {
-        const courseName = this.value;
+        const courseId = this.value;
         const box = document.getElementById('quota-box');
 
-        if (!courseName) {
+        if (!courseId) {
             box.style.display = 'none';
             return;
         }
 
-        fetch(`/api/course-availability?course=${encodeURIComponent(courseName)}`)
-            .then(response => response.json())
+        fetch(`{{ route('course.availability') }}?course=${encodeURIComponent(courseId)}`, { headers: { 'Accept': 'application/json' } })
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.json();
+            })
             .then(data => {
                 box.innerHTML = `<strong>${data.course}</strong> — Tersisa <strong>${data.remaining} kursi</strong>.`;
                 box.style.display = 'block';
             })
             .catch(error => {
                 console.error('Error fetching quota:', error);
+                box.textContent = 'Gagal memuat sisa kuota.';
+                box.style.display = 'block';
             });
     });
+
+    if (document.getElementById('kursus').value) {
+        document.getElementById('kursus').dispatchEvent(new Event('change'));
+    }
 </script>
 @endsection

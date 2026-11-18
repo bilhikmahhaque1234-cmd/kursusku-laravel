@@ -4,7 +4,7 @@
 
 @section('content')
 {{-- 2. HERO SECTION --}}
-<div class="row align-items-center my-5 py-2">
+<div class="row align-items-center gx-lg-5 gy-4 my-5 py-2">
     <!-- Bagian Kiri: Banner Utama -->
     <div class="col-lg-7 mb-4 mb-lg-0">
         <div class="cyber-card p-4 p-md-5">
@@ -29,9 +29,17 @@
     </div>
     
     <!-- Bagian Kanan: Gambar Hero -->
-    <div class="col-lg-5">
-        <div class="cyber-hero-image">
-            <img src="{{ asset('images/hero.png') }}" alt="Hero KursusKu" class="img-fluid">
+    <div class="col-lg-5 d-flex justify-content-center">
+        <div class="cyber-hero-wrap">
+            <div class="cyber-hero-image">
+                <img src="{{ asset('images/hero.png') }}" alt="Hero KursusKu" class="img-fluid">
+                <span class="hero-corner hero-corner-tl"></span>
+                <span class="hero-corner hero-corner-br"></span>
+                <div class="hero-caption">
+                    <small>KURSUSKU</small>
+                    <strong>BELAJAR DARI NOL, SAMPAI BISA.</strong>
+                </div>
+            </div>
         </div>
     </div>
 </div>

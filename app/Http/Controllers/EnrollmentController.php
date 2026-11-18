@@ -47,6 +47,12 @@ class EnrollmentController extends Controller
             ]
         );
 
+        $course = Course::withCount('enrollments')->findOrFail($data['course_id']);
+
+        if ($course->enrollments_count >= $course->quota) {
+            return back()->withInput()->withErrors(['course_id' => 'Kuota course ini sudah penuh.']);
+        }
+
         $data['status'] = 'registered';
         Enrollment::create($data);
 
