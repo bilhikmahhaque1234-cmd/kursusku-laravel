@@ -1,0 +1,9 @@
+At line:1 char:4
++ @' @extends('layouts.app')  @section('title', 'Tambah Enrollment - Ku ...
++    ~
+No characters are allowed after a here-string header but before the end of 
+the line.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecord 
+   Exception
+    + FullyQualifiedErrorId : UnexpectedCharactersAfterHereStringHeader
+ 

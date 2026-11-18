@@ -712,6 +712,20 @@ hr {
     letter-spacing: 0.04em;
 }
 
+.cyber-hero-image {
+    border: 2px solid #ffffff;
+    border-right: 8px solid var(--color-red);
+    transform: skewX(-8deg);
+    overflow: hidden;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), 0 0 30px rgba(22, 207, 251, 0.35);
+}
+
+.cyber-hero-image img {
+    display: block;
+    width: 100%;
+    transform: skewX(8deg) scale(1.2);
+}
+
 .course-card-cyber {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -741,6 +755,8 @@ hr {
    -------------------------------------------------------------------------- */
 @media (max-width: 991.98px) {
     .navbar-custom .nav-link { margin: 0.2rem 0; }
+    .cyber-hero-image,
+    .cyber-hero-image img { transform: none; }
     .cyber-stat-box,
     .info-tile { transform: none; }
     .cyber-stat-content,

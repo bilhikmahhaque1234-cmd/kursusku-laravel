@@ -31,3 +31,14 @@ Dokumentasi pengujian manual dan automated test fitur CRUD Course lanjutan (Show
 Perintah eksekusi:
 ```bash
 php artisan test
+
+PASSES  Tests\Feature\CourseTest
+✓ it can render course index page
+✓ it can store new course with valid payload
+✓ it validates required fields on store
+✓ it allows update course with same code
+✓ it can delete course
+
+Tests:    5 passed (12 assertions)
+Duration: 0.45s
+

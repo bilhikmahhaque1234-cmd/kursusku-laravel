@@ -28,27 +28,10 @@
         </div>
     </div>
     
-    <!-- Bagian Kanan: Box Statistik Skew Miring -->
+    <!-- Bagian Kanan: Gambar Hero -->
     <div class="col-lg-5">
-        <div class="d-flex flex-column gap-3">
-            <div class="cyber-stat-box text-center">
-                <div class="cyber-stat-content">
-                    <small class="text-muted fw-bold d-block">MODUL LATIHAN</small>
-                    <h2 class="display-6 fw-bold text-white mb-0 cyber-font">8 MODUL</h2>
-                </div>
-            </div>
-            <div class="cyber-stat-box text-center">
-                <div class="cyber-stat-content">
-                    <small class="text-muted fw-bold d-block">STATUS API / SYSTEM</small>
-                    <h2 class="display-6 fw-bold text-success mb-0 cyber-font">ONLINE</h2>
-                </div>
-            </div>
-            <div class="cyber-stat-box text-center">
-                <div class="cyber-stat-content">
-                    <small class="text-muted fw-bold d-block">KASUS UJI PRAKTIKUM</small>
-                    <h2 class="display-6 fw-bold text-warning mb-0 cyber-font">15 CASES</h2>
-                </div>
-            </div>
+        <div class="cyber-hero-image">
+            <img src="{{ asset('images/hero.png') }}" alt="Hero KursusKu" class="img-fluid">
         </div>
     </div>
 </div>
