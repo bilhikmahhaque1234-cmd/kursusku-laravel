@@ -10,7 +10,7 @@
     </div>
     <div class="d-flex align-items-center gap-3">
         <span class="badge bg-secondary fs-6">
-            Total Kursus: <strong>{{ $courses->count() }}</strong>
+            Total Kursus: <strong>{{ $courses->total() }}</strong>
         </span>
         <a href="{{ route('courses.create') }}" class="btn btn-primary fw-bold px-3 py-2">
             + Tambah Kursus
@@ -25,6 +25,33 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
+
+{{-- Form Search & Filter Status (Method GET) --}}
+<div class="card shadow-sm border-0 mb-3">
+    <div class="card-body">
+        <form method="GET" action="{{ route('courses.index') }}" class="row g-2">
+            <div class="col-md-6">
+                <input type="search"
+                       name="q"
+                       value="{{ $search ?? '' }}"
+                       class="form-control"
+                       placeholder="Cari kode atau nama kursus">
+            </div>
+            <div class="col-md-3">
+                <select name="status" class="form-select">
+                    <option value="">Semua status</option>
+                    <option value="open" @selected(($status ?? '') === 'open')>Open</option>
+                    <option value="closed" @selected(($status ?? '') === 'closed')>Closed</option>
+                    <option value="draft" @selected(($status ?? '') === 'draft')>Draft</option>
+                </select>
+            </div>
+            <div class="col-md-3 d-flex gap-2">
+                <button type="submit" class="btn btn-primary w-100">Cari</button>
+                <a href="{{ route('courses.index') }}" class="btn btn-outline-secondary w-100">Reset</a>
+            </div>
+        </form>
+    </div>
+</div>
 
 <div class="card shadow-sm border-0">
     <div class="card-body p-0">
@@ -45,7 +72,7 @@
                 <tbody>
                     @forelse($courses as $index => $course)
                         <tr>
-                            <td class="text-center fw-bold">{{ $index + 1 }}</td>
+                            <td class="text-center fw-bold">{{ $courses->firstItem() + $index }}</td>
                             <td>
                                 <span class="badge-code">
                                     {{ $course->code }}
@@ -77,7 +104,6 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                {{-- Tombol Detail, Edit, dan Form Hapus --}}
                                 <div class="d-flex gap-1 justify-content-center flex-wrap">
                                     <a href="{{ route('courses.show', $course) }}" class="btn btn-sm btn-outline-primary">
                                         Detail
@@ -98,7 +124,7 @@
                     @empty
                         <tr>
                             <td colspan="8" class="text-center py-4 text-muted">
-                                Belum ada data kursus yang tersedia.
+                                Tidak ada kursus yang sesuai pencarian/filter.
                             </td>
                         </tr>
                     @endforelse
@@ -106,5 +132,13 @@
             </table>
         </div>
     </div>
+    @if ($courses->hasPages())
+        <div class="card-footer d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <small class="pagination-info">
+                Menampilkan {{ $courses->firstItem() }}–{{ $courses->lastItem() }} dari {{ $courses->total() }} kursus
+            </small>
+            {{ $courses->links() }}
+        </div>
+    @endif
 </div>
 @endsection

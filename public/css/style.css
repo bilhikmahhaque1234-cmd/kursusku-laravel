@@ -864,3 +864,57 @@ hr {
 @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
 }
+
+/* --------------------------------------------------------------------------
+   PAGINATION & CARD FOOTER
+   -------------------------------------------------------------------------- */
+.card-footer {
+    background: rgba(0, 18, 51, 0.55) !important;
+    border: 0;
+    border-top: 3px solid var(--color-button-1);
+    padding: 0.9rem 1.5rem;
+    color: #ffffff;
+}
+
+.pagination-info {
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 600;
+}
+
+.card-footer nav { margin: 0; }
+
+.pagination {
+    --bs-pagination-bg: transparent;
+    --bs-pagination-color: #ffffff;
+    --bs-pagination-border-color: var(--color-border);
+    --bs-pagination-hover-bg: var(--color-button-1);
+    --bs-pagination-hover-color: var(--color-bg-dark);
+    --bs-pagination-hover-border-color: var(--color-button-1);
+    --bs-pagination-focus-bg: var(--color-button-1);
+    --bs-pagination-focus-color: var(--color-bg-dark);
+    --bs-pagination-focus-box-shadow: 0 0 0 0.2rem rgba(22, 207, 251, 0.35);
+    --bs-pagination-active-bg: var(--color-button-1);
+    --bs-pagination-active-color: var(--color-bg-dark);
+    --bs-pagination-active-border-color: #ffffff;
+    --bs-pagination-disabled-bg: transparent;
+    --bs-pagination-disabled-color: rgba(255, 255, 255, 0.35);
+    --bs-pagination-disabled-border-color: rgba(93, 106, 136, 0.5);
+    --bs-pagination-border-radius: 0;
+    margin: 0;
+    gap: 4px;
+}
+
+.pagination .page-link {
+    font-family: var(--font-rodin);
+    font-style: italic;
+    font-weight: 900;
+    text-transform: uppercase;
+    min-width: 40px;
+    text-align: center;
+    border-width: 2px;
+    transform: skewX(-8deg);
+}
+
+.pagination .page-item.active .page-link {
+    box-shadow: 0 0 14px rgba(22, 207, 251, 0.6);
+}
