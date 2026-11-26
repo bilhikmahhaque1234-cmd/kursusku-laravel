@@ -17,7 +17,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="menuUtama">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Beranda</a>
                 </li>
@@ -31,6 +31,32 @@
                     <a class="nav-link {{ request()->is('pendaftaran*') ? 'active' : '' }}"
                        href="{{ url('/pendaftaran') }}">Pendaftaran</a>
                 </li>
+
+                {{-- Tombol Login (tampil saat belum login) --}}
+                @guest
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <a class="btn btn-light btn-sm fw-bold px-3" href="{{ route('login') }}">
+                            Login
+                        </a>
+                    </li>
+                @endguest
+
+                {{-- Menu Profil & Tombol Logout (tampil setelah login) --}}
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('dashboard') ? 'active fw-bold' : '' }}" href="{{ route('dashboard') }}">
+                            Profil
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm fw-bold px-3">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>
